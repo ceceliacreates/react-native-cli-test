@@ -14,6 +14,9 @@ jobs:
           distribution: 'temurin'
           java-version: 11
           cache: 'gradle'
+      
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
         
       - name: Run debug build with Gradel Wrapper
         run: cd android && ./gradlew assembleDebug
