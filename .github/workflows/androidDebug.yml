@@ -1,0 +1,31 @@
+name: Android Debug build
+on:
+  workflow_dispatch:
+jobs:
+  Android-Debug:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      
+      - name: Set up JDK 1.8
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: 11
+          cache: 'gradle'
+      
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+        
+      - name: Bundle app
+        run: npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android --assets-dest android/app/src/main/res
+        
+      - name: Run debug build with Gradle Wrapper
+        run: cd android && ./gradlew assembleDebug
+        
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Android Debug Bundle
+          path: android/app/build/outputs/apk/debug/app-debug.apk
