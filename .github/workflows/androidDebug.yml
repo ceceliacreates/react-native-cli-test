@@ -19,7 +19,7 @@ jobs:
         run: yarn install --frozen-lockfile
         
       - name: Bundle app
-        run: react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android --assets-dest android/app/src/main/res
+        run: npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android --assets-dest android/app/src/main/res
         
       - name: Run debug build with Gradle Wrapper
         run: cd android && ./gradlew assembleDebug
