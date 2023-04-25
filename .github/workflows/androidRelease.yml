@@ -5,6 +5,12 @@ jobs:
   Android-Signed:
     runs-on: ubuntu-latest
     steps:
+     - name: Decode Keystore
+       env:
+            ENCODED_STRING: ${{ secrets.ANDROID_SIGNINGKEYBASE64 }}
+       run: |
+            echo $ENCODED_STRING | base64 -di > "${RUNNER_TEMP}"/RN-TEST-APP-RELEASE-KEY.keystore
+
       - name: Checkout
         uses: actions/checkout@v3
       
@@ -20,6 +26,10 @@ jobs:
         
       - name: Build release AAB
         run: cd android && ./gradlew bundleRelease
+        env:
+          ANDROID_ALIAS: ${{ secrets.ANDROID_ALIAS }}
+          ANDROID_KEYPASSWORD: ${{ secrets.ANDROID_KEYPASSWORD }}
+          ANDROID_KEYSTOREPASSWORD: ${{ secrets.ANDROID_KEYSTOREPASSWORD }}
         
       - name: Upload build artifact
         uses: actions/upload-artifact@v3

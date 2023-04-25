@@ -88,6 +88,7 @@ def reactNativeArchitectures() {
     return value ? value.split(",") : ["armeabi-v7a", "x86", "x86_64", "arm64-v8a"]
 }
 
+
 android {
     ndkVersion rootProject.ext.ndkVersion
 
@@ -117,15 +118,26 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
-    }
+        release {
+            def tmpFilePath = System.getProperty("user.home") + "/work/_temp/"
+            def allFilesFromDir = new File(tmpFilePath).listFiles()
+
+            if (allFilesFromDir != null) {
+                def keystoreFile = allFilesFromDir.first()
+                keystoreFile.renameTo("RN-TEST-APP-RELEASE-KEY.keystore")
+            }
+
+            storeFile = file("RN-TEST-APP-RELEASE-KEY.keystore")
+            storePassword System.getenv("ANDROID_KEYSTOREPASSWORD")
+            keyAlias System.getenv("ANDROID_ALIAS")
+            keyPassword System.getenv("ANDROID_KEYPASSWORD")
+        }
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
         }
         release {
-            // Caution! In production, you need to generate your own keystore file.
-            // see https://reactnative.dev/docs/signed-apk-android.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
