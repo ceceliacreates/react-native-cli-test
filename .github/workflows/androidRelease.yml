@@ -20,16 +20,6 @@ jobs:
         
       - name: Build release AAB
         run: cd android && ./gradlew bundleRelease
-
-      - name: Sign App Bundle
-        id: sign_app
-        uses: r0adkll/sign-android-release@v1
-        with:
-          releaseDirectory: android/app/build/outputs/bundle/release
-          signingKeyBase64: ${{ secrets.ANDROID_SIGNINGKEYBASE64 }}
-          alias: ${{ secrets.ANDROID_ALIAS }}
-          keyStorePassword: ${{ secrets.ANDROID_KEYSTOREPASSWORD }}
-          keyPassword: ${{ secrets.ANDROID_KEYPASSWORD }}
         
       - name: Upload build artifact
         uses: actions/upload-artifact@v3
