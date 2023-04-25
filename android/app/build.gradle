@@ -119,14 +119,6 @@ android {
             keyPassword 'android'
         }
         release {
-            def tmpFilePath = System.getProperty("user.home") + "/work/_temp/"
-            def allFilesFromDir = new File(tmpFilePath).listFiles()
-
-            if (allFilesFromDir != null) {
-                def keystoreFile = allFilesFromDir.first()
-                keystoreFile.renameTo("RN-TEST-APP-RELEASE-KEY.keystore")
-            }
-
             storeFile = file("RN-TEST-APP-RELEASE-KEY.keystore")
             storePassword System.getenv("ANDROID_KEYSTOREPASSWORD")
             keyAlias System.getenv("ANDROID_ALIAS")
