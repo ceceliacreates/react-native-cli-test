@@ -2,7 +2,7 @@ name: Android Signed build
 on:
   workflow_dispatch:
 jobs:
-  Android-Debug:
+  Android-Signed:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
