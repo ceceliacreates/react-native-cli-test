@@ -132,6 +132,7 @@ android {
             keyAlias System.getenv("ANDROID_ALIAS")
             keyPassword System.getenv("ANDROID_KEYPASSWORD")
         }
+    }
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
