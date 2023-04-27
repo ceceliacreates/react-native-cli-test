@@ -119,10 +119,18 @@ android {
             keyPassword 'android'
         }
         release {
+            if (project.hasProperty('UPLOAD_STORE_FILE')) {
+                storeFile file(UPLOAD_STORE_FILE)
+                storePassword UPLOAD_STORE_PASSWORD
+                keyAlias UPLOAD_KEY_ALIAS
+                keyPassword UPLOAD_KEY_PASSWORD
+            }
+            else {
             storeFile = file("RN-TEST-APP-RELEASE-KEY.keystore")
             storePassword System.getenv("ANDROID_KEYSTOREPASSWORD")
             keyAlias System.getenv("ANDROID_ALIAS")
             keyPassword System.getenv("ANDROID_KEYPASSWORD")
+            }
         }
     }
     buildTypes {
