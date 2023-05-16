@@ -117,7 +117,7 @@ android {
             storePassword 'android'
             keyAlias 'androiddebugkey'
             keyPassword 'android'
-        },
+        }
           release {
             def tmpFilePath = System.getProperty("user.home") + "/work/_temp/keystore/"
             def allFilesFromDir = new File(tmpFilePath).listFiles()
@@ -138,7 +138,7 @@ android {
             signingConfig signingConfigs.debug
         }
         release {
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
