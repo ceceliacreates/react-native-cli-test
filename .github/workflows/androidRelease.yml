@@ -6,6 +6,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
+      - name: Decode Keystore
+        id: decode_keystore
+        uses: timheuer/base64-to-file@v1
+        with:
+          fileName: 'keystore/RN-TEST-APP-RELEASE-KEY.keystore'
+          encodedString: ${{ secrets.ANDROID_SIGNINGKEYBASE64 }}
+
       - name: Checkout
         uses: actions/checkout@v3
       
@@ -19,13 +26,6 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Decode Keystore
-        env:
-          ENCODED_STRING: ${{ secrets.ANDROID_SIGNINGKEYBASE64 }}
-        run: |
-          echo $ENCODED_STRING > keystore-b64.txt
-          base64 -d keystore-b64.txt > react-native-cli-test/react-native-cli-test/android/app/RN-TEST-APP-RELEASE-KEY.keystore
-        
       - name: Build release AAB
         run: cd android && ./gradlew bundleRelease
         env:
