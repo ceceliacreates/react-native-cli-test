@@ -117,20 +117,20 @@ android {
             storePassword 'android'
             keyAlias 'androiddebugkey'
             keyPassword 'android'
-        }
-        release {
-            if (project.hasProperty('UPLOAD_STORE_FILE')) {
-                storeFile file(UPLOAD_STORE_FILE)
-                storePassword UPLOAD_STORE_PASSWORD
-                keyAlias UPLOAD_KEY_ALIAS
-                keyPassword UPLOAD_KEY_PASSWORD
+        },
+          release {
+            def tmpFilePath = System.getProperty("user.home") + "/work/_temp/keystore/"
+            def allFilesFromDir = new File(tmpFilePath).listFiles()
+
+            if (allFilesFromDir != null) {
+                def keystoreFile = allFilesFromDir.first()
+                keystoreFile.renameTo("keystore/RN-TEST-APP-RELEASE-KEY.keystore")
             }
-            else {
-            storeFile = file("RN-TEST-APP-RELEASE-KEY.keystore")
+
+            storeFile = file("keystore/RN-TEST-APP-RELEASE-KEY.keystore")
             storePassword System.getenv("ANDROID_KEYSTOREPASSWORD")
             keyAlias System.getenv("ANDROID_ALIAS")
             keyPassword System.getenv("ANDROID_KEYPASSWORD")
-            }
         }
     }
     buildTypes {
@@ -138,7 +138,7 @@ android {
             signingConfig signingConfigs.debug
         }
         release {
-            signingConfig signingConfigs.release
+            signingConfig signingConfigs.debug
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
