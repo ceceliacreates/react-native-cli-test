@@ -118,27 +118,13 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
-          release {
-            def tmpFilePath = System.getProperty("user.home") + "/work/_temp/keystore/"
-            def allFilesFromDir = new File(tmpFilePath).listFiles()
-
-            if (allFilesFromDir != null) {
-                def keystoreFile = allFilesFromDir.first()
-                keystoreFile.renameTo("keystore/RN-TEST-APP-RELEASE-KEY.keystore")
-            }
-
-            storeFile = file("keystore/RN-TEST-APP-RELEASE-KEY.keystore")
-            storePassword System.getenv("ANDROID_KEYSTOREPASSWORD")
-            keyAlias System.getenv("ANDROID_ALIAS")
-            keyPassword System.getenv("ANDROID_KEYPASSWORD")
-        }
     }
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
         }
         release {
-            signingConfig signingConfigs.release
+            signingConfig signingConfigs.debug
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
