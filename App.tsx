@@ -8,6 +8,7 @@
 import React from 'react';
 import type {PropsWithChildren} from 'react';
 import {
+  Image,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -37,7 +38,7 @@ function Section({children, title}: SectionProps): JSX.Element {
         style={[
           styles.sectionTitle,
           {
-            color: isDarkMode ? Colors.white : Colors.black,
+            color: isDarkMode ? Colors.white : '#4169e1',
           },
         ]}>
         {title}
@@ -59,7 +60,7 @@ function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+    backgroundColor: isDarkMode ? '#4169e1' : Colors.lighter,
   };
 
   return (
@@ -75,6 +76,13 @@ function App(): JSX.Element {
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
+             <Image source={require('./img/appflowpackage.png')} style={{
+    width: 100,
+    height: 100,
+    marginTop: 20,
+    marginLeft: '35%',
+    resizeMode: 'contain'
+  }}/>
           <Section title="Appflow">
             The <Text style={styles.highlight}>easiest</Text> way to build and ship mobile apps.
           </Section>
@@ -90,7 +98,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
   },
   sectionTitle: {
-    fontSize: 24,
+    fontSize: 42,
     fontWeight: '600',
   },
   sectionDescription: {
@@ -100,6 +108,7 @@ const styles = StyleSheet.create({
   },
   highlight: {
     fontWeight: '700',
+    color: '#4169e1'
   },
 });
 
