@@ -1,4 +1,4 @@
-package com.reactnativetest;
+package io.ionic.rnvanillatest;
 
 import android.app.Application;
 import com.facebook.react.PackageList;

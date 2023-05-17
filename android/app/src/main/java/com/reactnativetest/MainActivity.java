@@ -1,4 +1,4 @@
-package com.reactnativetest;
+package io.ionic.rnvanillatest;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
