@@ -74,7 +74,7 @@ function App(): JSX.Element {
         style={backgroundStyle}>
         <View
           style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
+            backgroundColor: isDarkMode ? '#4169e1' : Colors.lighter,
           }}>
              <Image source={require('./img/appflowpackage.png')} style={{
     width: 100,
