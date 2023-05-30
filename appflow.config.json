@@ -1,0 +1,9 @@
+{
+    "apps":
+    [
+        {
+            "appId": "c11fae7e",
+            "dependencyInstallCommand": "yarn && npx trapeze run appflow.yml -y --$CI_PLATFORM"
+        }
+    ]
+}
