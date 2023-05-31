@@ -1,13 +1,8 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
 
 import React from 'react';
 import type {PropsWithChildren} from 'react';
 import {
+  Button,
   Image,
   SafeAreaView,
   ScrollView,
@@ -27,14 +22,26 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 type SectionProps = PropsWithChildren<{
-  title: string;
+  title?: string;
 }>;
+
+type ButtonSectionProps = {
+  title: string;
+}
+
+function ButtonSection({title}: ButtonSectionProps): JSX.Element {
+return (
+  <View style={styles.buttonContainer}>
+    <Button title={title} color={'#4169e1'}></Button>
+  </View>
+)
+}
 
 function Section({children, title}: SectionProps): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
   return (
     <View style={styles.sectionContainer}>
-      <Text
+      { title && <Text
         style={[
           styles.sectionTitle,
           {
@@ -42,7 +49,7 @@ function Section({children, title}: SectionProps): JSX.Element {
           },
         ]}>
         {title}
-      </Text>
+      </Text> }
       <Text
         style={[
           styles.sectionDescription,
@@ -60,7 +67,8 @@ function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
-    backgroundColor: isDarkMode ? '#4169e1' : Colors.lighter,
+    backgroundColor: isDarkMode ? '#4169e1' : '#ffffff',
+    flex: 1
   };
 
   return (
@@ -74,7 +82,7 @@ function App(): JSX.Element {
         style={backgroundStyle}>
         <View
           style={{
-            backgroundColor: isDarkMode ? '#4169e1' : Colors.lighter,
+            backgroundColor: isDarkMode ? '#4169e1' : '#ffffff',
           }}>
              <Image source={require('./img/appflowpackage.png')} style={{
     width: 100,
@@ -86,6 +94,16 @@ function App(): JSX.Element {
           <Section title="Appflow">
             The <Text style={styles.highlight}>easiest</Text> way to build and ship mobile apps.
           </Section>
+          <Section>
+            📦 Cloud native <Text style={styles.highlight}>iOS and Android</Text> builds
+          </Section>
+          <Section>
+            ⬆️ Upload to <Text style={styles.highlight}>Google Play Store</Text> and <Text style={styles.highlight}>Apple App Store</Text>
+          </Section>
+          <Section>
+            🚀 <Text style={styles.highlight}>Automate</Text> your mobile app delivery
+          </Section>
+          <ButtonSection title="Get Started"></ButtonSection>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -110,6 +128,11 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: '#4169e1'
   },
+  buttonContainer: {
+    marginTop: 32,
+    flex: 1,
+    alignItems: 'center'
+  }
 });
 
 export default App;
