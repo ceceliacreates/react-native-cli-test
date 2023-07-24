@@ -103,6 +103,9 @@ function App(): JSX.Element {
           <Section>
             🚀 <Text style={styles.highlight}>Automate</Text> your mobile app delivery
           </Section>
+          <Section>
+            📲 <Text style={styles.highlight}>Preview</Text> your app on native devices
+          </Section>
           <ButtonSection title="Get Started"></ButtonSection>
         </View>
       </ScrollView>
